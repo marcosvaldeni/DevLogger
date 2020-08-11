@@ -10,11 +10,18 @@ import { Log } from '../../models/Log';
 })
 export class LogsComponent implements OnInit {
   logs: Log[];
+ 
 
-  constructor(private logSevice: LogService) { }
+  constructor(private logService: LogService) { }
 
   ngOnInit(): void {
-    this.logs = this.logSevice.getLogs();
+    this.logService.getLogs().subscribe(logs => {
+      this.logs = logs;
+    });
+  }
+
+  onSelect(log: Log) {
+    this.logService.setFormLog(log);
   }
 
 }
