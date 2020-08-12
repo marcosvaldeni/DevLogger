@@ -20,7 +20,7 @@ export class LogFormComponent implements OnInit {
   ngOnInit(): void {
     this.logService.selectedLog.subscribe(log => {
       if(log.id !== null) {
-        this.isNew = false;
+        this.isNew = false;``
         console.log(this.isNew);
         this.id = log.id;
         this.text = log.text;
@@ -46,7 +46,18 @@ export class LogFormComponent implements OnInit {
       }
       this.logService.updateLog(updLog);
     }
+
+    this.clearState();
   }
+
+  clearState() {
+    this.isNew = true;
+    this.id = '';
+    this.text = '';
+    this.date = '';
+    this.logService.clearState();
+  }
+
 
   generateId () {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
